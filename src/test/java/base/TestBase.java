@@ -24,7 +24,7 @@ public class TestBase {
 	public static String loadPropertyFile = "Android_flipboard.properties";
 	public static Logger log = Logger.getLogger(TestBase.class);
 
-	public void takeScreenshot(Scenario scenario) {
+	/*public void takeScreenshot(Scenario scenario) {
 
 		Date d = new Date();
 		String fileName = d.toString().replace(":", "_").replace(" ", "_")+".jpg";
@@ -47,8 +47,49 @@ public class TestBase {
 			e.printStackTrace();
 		}
 		
+	}*/
+	
+	//***************************************
+	// My Implemented Method
+	public void takeScreenshot(Scenario scenario) {
+
+		Date d = new Date();
+		String fileName = d.toString().replace(":", "_").replace(" ", "_")+".jpg";
+		String filePath = System.getProperty("user.dir")+"/reports/"+fileName;
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(scrFile, new File(filePath));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			ExtentCucumberAdapter.getCurrentStep().addScreenCaptureFromPath(filePath);
+			//to embed screenshot in Cucumber Report
+			scenario.embed(Files.readAllBytes(scrFile.toPath()), "image/png");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void captureScreenshot() throws IOException {
+
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+
+		Date d = new Date();
+		String screenshotName = d.toString().replace(":", "_").replace(" ", "_") + ".png";
+
+		FileUtils.copyFile(scrFile,
+				
+		new File(System.getProperty("user.dir") + "/target/surefire-reports/html/" + screenshotName));
+		String screenshotPath= System.getProperty("user.dir") + "\\target\\surefire-reports\\html\\" + screenshotName;
+
 	}
 
+	//*********************************
 
 	public void setUp() {
 
