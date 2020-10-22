@@ -28,8 +28,8 @@ public class TestBase {
 
 		Date d = new Date();
 		String fileName = d.toString().replace(":", "_").replace(" ", "_")+".jpg";
-		//String filePath = System.getProperty("user.dir")+"\\reports\\"+fileName;
-		String filePath = System.getProperty("user.dir")+"\\target\\screenshots\\"+fileName;
+		String filePath = System.getProperty("user.dir")+"\\reports\\"+fileName;
+		//String filePath = System.getProperty("user.dir")+"\\target\\screenshots\\"+fileName;
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		try {
 			FileUtils.copyFile(scrFile, new File(filePath));
