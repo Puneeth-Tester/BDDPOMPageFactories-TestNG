@@ -60,7 +60,7 @@ public class TestBase {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		try {
 			System.out.println("File Path - " + filePath);
-			FileUtils.copyFile(scrFile, new File(filePath));
+			FileUtils.copyFile(scrFile.getAbsoluteFile(), new File(filePath).getAbsoluteFile());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
