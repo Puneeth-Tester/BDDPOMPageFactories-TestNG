@@ -55,9 +55,10 @@ public class TestBase {
 
 		Date d = new Date();
 		String fileName = d.toString().replace(":", "_").replace(" ", "_")+".jpg";
-		String filePath = System.getProperty("user.dir")+"/reports/"+fileName;
+		String filePath = System.getProperty("user.dir") + "/reports/"+fileName;
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		try {
+			System.out.println("File Path - " + filePath);
 			FileUtils.copyFile(scrFile, new File(filePath));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

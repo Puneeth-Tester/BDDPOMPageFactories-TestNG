@@ -17,7 +17,7 @@ import utilities.CucumberReporting;
 						 	"junit:target/cucumber-reports/cucumber.xml",
 							"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 						 	},
-				 tags= {"@ZFailFeature,@SearchItem,@FailFeature,@LoginFeature"})
+				 tags= {"@FailFeature"})
 public class RunCuke extends AbstractTestNGCucumberTests {
 
 	@AfterSuite
