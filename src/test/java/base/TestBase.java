@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.Reporter;
 
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
 
@@ -54,9 +55,8 @@ public class TestBase {
 	public void takeScreenshot(Scenario scenario) {
 
 		Date d = new Date();
-		String fileName = d.toString().replace(":", "_").replace(" ", "_")+".jpg";
-		//String filePath = System.getProperty("user.dir") + "/reports/"+fileName;
-		String filePath = "C:\\Users\\91967\\.jenkins\\workspace\\BDDPOMPageFactoryFrameworkGitHUB-TestNG" + "\\reports\\"+fileName;
+		String fileName = d.toString().replace(":", "_").replace(" ", "_")+".png";
+		String filePath = System.getProperty("user.dir") + "/target/cucumber-reports/screenshots/"+fileName;
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		try {
 			System.out.println("File Path - " + filePath);
@@ -77,20 +77,6 @@ public class TestBase {
 		
 	}
 	
-	public void captureScreenshot() throws IOException {
-
-		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-
-		Date d = new Date();
-		String screenshotName = d.toString().replace(":", "_").replace(" ", "_") + ".png";
-
-		FileUtils.copyFile(scrFile,
-				
-		new File(System.getProperty("user.dir") + "/target/surefire-reports/html/" + screenshotName));
-		String screenshotPath= System.getProperty("user.dir") + "\\target\\surefire-reports\\html\\" + screenshotName;
-
-	}
-
 	//*********************************
 
 	public void setUp() {
