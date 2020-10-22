@@ -55,7 +55,8 @@ public class TestBase {
 
 		Date d = new Date();
 		String fileName = d.toString().replace(":", "_").replace(" ", "_")+".jpg";
-		String filePath = System.getProperty("user.dir") + "/reports/"+fileName;
+		//String filePath = System.getProperty("user.dir") + "/reports/"+fileName;
+		String filePath = "C:\\Users\\91967\\.jenkins\\workspace\\BDDPOMPageFactoryFrameworkGitHUB-TestNG" + "\\reports\\"+fileName;
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		try {
 			System.out.println("File Path - " + filePath);
