@@ -1,5 +1,7 @@
 package steps;
 
+import java.io.IOException;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
@@ -21,7 +23,6 @@ import utilities.CucumberReporting;
 
 public class FlipboardSteps extends TestBase{
 	
-	
 	LoginScreen login;
 	ChooseTopicsScreen  topicScreen;
 	HomeScreen home;
@@ -29,7 +30,7 @@ public class FlipboardSteps extends TestBase{
 	
 	
 	@Before
-	public void initialization() {	
+	public void initialization(Scenario scenario) throws Throwable {	
 		setUp();
 		login = new LoginScreen(driver);
 		topicScreen = new ChooseTopicsScreen(driver);
@@ -50,15 +51,16 @@ public class FlipboardSteps extends TestBase{
 	}*/
 	
 	@After
-	public void tearDown(Scenario scenario) {
+	public void tearDown(Scenario scenario) throws IOException {
 		if(scenario.isFailed()) {
 			//captureScreenshot
 			ExtentCucumberAdapter.getCurrentStep().fail("Screenshot Attached ----->");
-			takeScreenshot(scenario);
+			//takeScreenshot(scenario);
+			ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(getBase64Screenshot(scenario)); //for html
 		}
 		quit();
 	}
-		
+	
 	@Given("user clicks on getStartedButton")
 	public void user_clicks_on_getStartedButton() {
 		login.clickGetStartedBtn();

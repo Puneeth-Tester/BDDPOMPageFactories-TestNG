@@ -3,12 +3,15 @@ package base;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.Reporter;
 
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
@@ -52,7 +55,7 @@ public class TestBase {
 	
 	//***************************************
 	// My Implemented Method
-	public void takeScreenshot(Scenario scenario) {
+	/*public void takeScreenshot(Scenario scenario) {
 
 		Date d = new Date();
 		String fileName = d.toString().replace(":", "_").replace(" ", "_")+".png";
@@ -75,6 +78,20 @@ public class TestBase {
 			e.printStackTrace();
 		}
 		
+	}*/
+	
+	public String getBase64Screenshot(Scenario scenario) {
+	    String Base64StringofScreenshot="";
+	    File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+	    try {
+	    	byte[] fileContent = FileUtils.readFileToByteArray(src);
+	    	Base64StringofScreenshot = "data:image/png;base64," + Base64.getEncoder().encodeToString(fileContent);
+	    	//to embed screenshot in Cucumber Report
+			scenario.embed(Files.readAllBytes(src.toPath()), "image/png");
+		}catch(IOException e) {
+	    	
+	    }
+	    return Base64StringofScreenshot;
 	}
 	
 	//*********************************
