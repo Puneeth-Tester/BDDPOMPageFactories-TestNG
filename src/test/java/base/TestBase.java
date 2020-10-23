@@ -56,7 +56,7 @@ public class TestBase {
 
 		Date d = new Date();
 		String fileName = d.toString().replace(":", "_").replace(" ", "_")+".png";
-		String filePath = System.getProperty("user.dir") + "/target/cucumber-reports/advanced-reports/extentreports/screenshots/"+fileName;
+		String filePath = System.getProperty("user.dir") + "/target/cucumber-reports/advanced-reports/extentreports/"+fileName;
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		try {
 			System.out.println("File Path - " + filePath);
